@@ -28,11 +28,22 @@ public class PlayerAnims : MonoBehaviour
         bool hasHorizontalInput = !Mathf.Approximately(pC.horizontalInput, 0f);
         bool movementCheck = hasHorizontalInput;
 
+        isGrounded = movementCheck;
         isMoving = hasHorizontalInput;
-
-        if (isGrounded) 
+        
+        switch (isMoving) 
+        {
+            case true:
+                m_Animator.SetBool("isMoving", isMoving);
+                break;
+            case false:
+                m_Animator.SetBool("isMoving", isMoving);
+                break;
+        }
+        
+        /*if (isGrounded) 
         {
             m_Animator.SetBool("isMoving", isMoving);
-        }
+        }*/ 
     }
 }

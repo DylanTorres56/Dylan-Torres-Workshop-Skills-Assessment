@@ -10,12 +10,15 @@ public class PlayerAnims : MonoBehaviour
 {
     [SerializeField] private PlayerController pC;
     [SerializeField] Animator m_Animator;
+    [SerializeField] SpriteRenderer sR;
     [SerializeField] bool isGrounded, isMoving, isOnWall, isParrying;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_Animator.GetComponent<Animator>();
+        pC = gameObject.GetComponent<PlayerController>();
+        m_Animator = gameObject.GetComponent<Animator>();
+        sR = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame

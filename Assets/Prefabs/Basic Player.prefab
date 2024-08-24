@@ -149,7 +149,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -160,7 +160,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!95 &8090328810003314529
 Animator:
   serializedVersion: 5
@@ -194,7 +194,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b861e82dc91c31049ab56ac2d995dd08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   movementSpeed: 15
+  horizontalInput: 0
+  jumpHeight: 15
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  posOfGCB: {x: 0, y: 0}
+  dimsOfGCB: {x: 0, y: 0}
+  wallCheck: 0
+  posOfWCB: {x: 0, y: 0}
+  dimsOfWCB: {x: 0, y: 0}
+  yGizmoDisplacement: 1.25
+  isAtopGround: 0
 --- !u!114 &8933866719913848973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,3 +220,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988f45223dff97941801b522ee809c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pC: {fileID: 0}
+  m_Animator: {fileID: 0}
+  sR: {fileID: 0}
+  isGrounded: 0
+  isMoving: 0
+  isOnWall: 0
+  isParrying: 0

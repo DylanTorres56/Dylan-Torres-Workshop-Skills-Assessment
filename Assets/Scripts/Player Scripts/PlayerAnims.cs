@@ -24,5 +24,12 @@ public class PlayerAnims : MonoBehaviour
         // Inputs used to switch between idle animation and moving animation.
         bool hasHorizontalInput = !Mathf.Approximately(pC.horizontalInput, 0f);
         bool movementCheck = hasHorizontalInput;
+
+        isMoving = hasHorizontalInput;
+
+        if (isGrounded) 
+        {
+            m_Animator.SetBool("isMoving", isMoving);
+        }
     }
 }

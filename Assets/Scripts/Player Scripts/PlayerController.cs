@@ -7,20 +7,31 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Movement")]
     [SerializeField] private float movementSpeed; // Player's movement speed.
-    [SerializeField] private float horizontalInput; // Player's horizontal input.
-    [SerializeField] private bool groundCheck; // Checks if the player is grounded.
+    public float horizontalInput; // Player's horizontal input.
+
+    [Header("Ground & Wall Checks")]
+    public bool groundCheck; // Checks if the player is grounded.
+    public Vector2 posOfGCB; // Position of Ground Check Box.
+    public Vector2 dimsOfGCB; // Dimensions of Ground Check Box.
+
+    public float wallCheck; // Checks if player is holding the wall; +1 is right wall and -1 is left wall.
+    public Vector2 posOfWCB; // Position of Wall Check Box.
+    public Vector2 dimsOfWCB; // Dimensions of Wall Check Box.
+
     [SerializeField] float yGizmoDisplacement; // Edits the y-axis of the player's ground checker gizmo.
 
     // Start is called before the first frame update
     void Start()
     {
-
+        posOfGCB = new Vector2(transform.position.x, transform.position.y - yGizmoDisplacement);
+        dimsOfGCB = new Vector2(1f, 0.2f);
     }
 
     // Update is called once per frame
     void Update()
     {
         PlayerInput(); // Inputs are counted by frame.
+        groundCheck = Physics2D.OverlapBox(posOfGCB, dimsOfGCB, 0f);
     }
 
     // FixedUpdate is called once per physics update
@@ -45,6 +56,6 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {        
         Gizmos.color = Color.green;
-        Gizmos.DrawCube(new Vector2(transform.position.x, transform.position.y - yGizmoDisplacement), new Vector2(1f, 0.2f));
+        Gizmos.DrawCube(posOfGCB, dimsOfGCB);
     }
 }

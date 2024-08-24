@@ -386,6 +386,22 @@ PrefabInstance:
       value: Basic Player
       objectReference: {fileID: 0}
     - target: {fileID: 5463705517374093789, guid: ef328d9731c3774488e55862de1d01a7, type: 3}
+      propertyPath: posOfGCB.y
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463705517374093789, guid: ef328d9731c3774488e55862de1d01a7, type: 3}
+      propertyPath: dimsOfGCB.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463705517374093789, guid: ef328d9731c3774488e55862de1d01a7, type: 3}
+      propertyPath: dimsOfGCB.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463705517374093789, guid: ef328d9731c3774488e55862de1d01a7, type: 3}
+      propertyPath: groundCheck
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463705517374093789, guid: ef328d9731c3774488e55862de1d01a7, type: 3}
       propertyPath: yGizmoDisplacement
       value: 1.2
       objectReference: {fileID: 0}

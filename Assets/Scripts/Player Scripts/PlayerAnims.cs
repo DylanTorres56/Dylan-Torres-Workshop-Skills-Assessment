@@ -12,6 +12,7 @@ public class PlayerAnims : MonoBehaviour
     [SerializeField] Animator m_Animator;
     [SerializeField] SpriteRenderer sR;
     [SerializeField] bool isGrounded, isMoving, isOnWall, isParrying;
+    [SerializeField] bool hInputNegative;
 
     // Start is called before the first frame update
     void Start()
@@ -28,19 +29,35 @@ public class PlayerAnims : MonoBehaviour
         bool hasHorizontalInput = !Mathf.Approximately(pC.horizontalInput, 0f);
         bool movementCheck = hasHorizontalInput;
 
-        isGrounded = movementCheck;
-        isMoving = hasHorizontalInput;
-        
-        switch (isMoving) 
+        isGrounded = pC.isAtopGround;
+        isMoving = movementCheck;
+
+        switch (isGrounded) 
         {
             case true:
-                m_Animator.SetBool("isMoving", isMoving);
+                m_Animator.SetBool("isGrounded", isGrounded);
+                m_Animator.SetFloat("hInput", pC.horizontalInput);
+                sR.flipX = pC.horizontalInput < 0;
                 break;
             case false:
-                m_Animator.SetBool("isMoving", isMoving);
+                m_Animator.SetBool("isGrounded", isGrounded);
+                m_Animator.SetFloat("hInput", pC.horizontalInput);
                 break;
         }
         
+        switch (isMoving) 
+        {            
+            case true:
+                m_Animator.SetBool("isMoving", isMoving);
+                m_Animator.SetFloat("hInput", pC.horizontalInput);
+                sR.flipX = pC.horizontalInput < 0;
+                break;
+            case false:
+                m_Animator.SetBool("isMoving", isMoving);
+                m_Animator.SetFloat("hInput", pC.horizontalInput);
+                break;
+        }
+
         /*if (isGrounded) 
         {
             m_Animator.SetBool("isMoving", isMoving);

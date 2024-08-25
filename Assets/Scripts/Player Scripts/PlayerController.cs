@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 
     [Header("Player Movement")]
-    [SerializeField] private Rigidbody2D rb; // Player's 2D RB.
+    public Rigidbody2D rb; // Player's 2D RB.
     [SerializeField] private float movementSpeed; // Player's movement speed.
     public float horizontalInput; // Player's horizontal input.
     public float jumpHeight;
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 dimsOfWCB; // Dimensions of Wall Check Box.
     [SerializeField] float yGizmoDisplacement; // Edits the y-axis of the player's ground checker gizmo.
 
-    [SerializeField] private bool isAtopGround; // Visually displays in the editor if the player is grounded.
+    public bool isAtopGround; // Visually displays in the editor if the player is grounded.
     public bool GroundCheck() // Checks if the player is grounded.
     {
         posOfGCB = new Vector2(transform.position.x, transform.position.y - yGizmoDisplacement);

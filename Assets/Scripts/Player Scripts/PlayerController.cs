@@ -86,10 +86,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // PlayerMovement detects when players are moving
+    // PlayerMovement detects when players are moving and not parrying.
     void PlayerMovement()
     {
-        transform.Translate(new Vector3(horizontalInput, 0, 0) * Time.deltaTime * movementSpeed);
+        if (transform.tag == "Player") 
+        {
+            transform.Translate(new Vector3(horizontalInput, 0, 0) * Time.deltaTime * movementSpeed);
+        }
     }
 
     // Gizmos will be drawn to test the ground and wall checkers

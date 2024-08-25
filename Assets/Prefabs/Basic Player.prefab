@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 8090328810003314529}
   - component: {fileID: 5463705517374093789}
   - component: {fileID: 8933866719913848973}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Basic Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -203,11 +203,13 @@ MonoBehaviour:
     m_Bits: 64
   posOfGCB: {x: 0, y: 0}
   dimsOfGCB: {x: 0, y: 0}
-  wallCheck: 0
-  posOfWCB: {x: 0, y: 0}
-  dimsOfWCB: {x: 0, y: 0}
   yGizmoDisplacement: 1.25
   isAtopGround: 0
+  wallCheck: 0
+  posOfLWCB: {x: 0, y: 0}
+  posOfRWCB: {x: 0, y: 0}
+  dimsOfWCB: {x: 0, y: 0}
+  xGizmoDisplacement: 0.6
 --- !u!114 &8933866719913848973
 MonoBehaviour:
   m_ObjectHideFlags: 0

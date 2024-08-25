@@ -935,14 +935,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Basic Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4737620275949180710, guid: ef328d9731c3774488e55862de1d01a7, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5463705517374093789, guid: ef328d9731c3774488e55862de1d01a7, type: 3}
-      propertyPath: xGizmoDisplacement
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 5677370491335394783, guid: ef328d9731c3774488e55862de1d01a7, type: 3}
       propertyPath: m_RootOrder
       value: 2

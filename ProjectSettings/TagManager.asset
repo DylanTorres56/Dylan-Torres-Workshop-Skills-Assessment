@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Wall
+  - Parrying Player
   layers:
   - Default
   - TransparentFX

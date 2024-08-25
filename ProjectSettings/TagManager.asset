@@ -7,6 +7,7 @@ TagManager:
   - Floor
   - Wall
   - Parrying Player
+  - Hazard
   layers:
   - Default
   - TransparentFX

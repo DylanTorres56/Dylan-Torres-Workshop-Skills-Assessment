@@ -12,7 +12,6 @@ public class PlayerAnims : MonoBehaviour
     [SerializeField] Animator m_Animator;
     [SerializeField] SpriteRenderer sR;
     [SerializeField] bool isGrounded, isMoving, isOnWall, isParrying;
-    [SerializeField] bool hInputNegative;
 
     // Start is called before the first frame update
     void Start()
@@ -31,17 +30,16 @@ public class PlayerAnims : MonoBehaviour
 
         isGrounded = pC.isAtopGround;
         isMoving = movementCheck;
+        isOnWall = pC.WallCheck();
 
         switch (isGrounded) 
         {
             case true:
                 m_Animator.SetBool("isGrounded", isGrounded);
-                m_Animator.SetFloat("hInput", pC.horizontalInput);
                 sR.flipX = pC.horizontalInput < 0;
                 break;
             case false:
                 m_Animator.SetBool("isGrounded", isGrounded);
-                m_Animator.SetFloat("hInput", pC.horizontalInput);
                 break;
         }
         
@@ -49,18 +47,23 @@ public class PlayerAnims : MonoBehaviour
         {            
             case true:
                 m_Animator.SetBool("isMoving", isMoving);
-                m_Animator.SetFloat("hInput", pC.horizontalInput);
                 sR.flipX = pC.horizontalInput < 0;
                 break;
             case false:
                 m_Animator.SetBool("isMoving", isMoving);
-                m_Animator.SetFloat("hInput", pC.horizontalInput);
                 break;
         }
 
-        /*if (isGrounded) 
+        switch (isOnWall) 
         {
-            m_Animator.SetBool("isMoving", isMoving);
-        }*/ 
+            case true:
+                m_Animator.SetBool("isOnWall", isOnWall);
+                sR.flipX = pC.wallCheck < 0;
+                break;
+            case false:
+                m_Animator.SetBool("isOnWall", isOnWall);
+                break;
+        }
+
     }
 }

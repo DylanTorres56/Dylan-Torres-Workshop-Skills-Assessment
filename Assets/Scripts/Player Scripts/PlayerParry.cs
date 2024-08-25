@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerParry : MonoBehaviour
 {
-    [SerializeField] private BoxCollider2D playerHitbox;
+    [SerializeField] BoxCollider2D playerHitbox; // The hitbox of the player.    
 
     // Start is called before the first frame update
     void Start()
@@ -31,4 +31,6 @@ public class PlayerParry : MonoBehaviour
     {
         playerHitbox.tag = "Player";
     }
+
+
 }

@@ -24,7 +24,7 @@ public class PlayerParry : MonoBehaviour
     void ParryActivate() 
     {        
         playerHitbox.tag = "Parrying Player";
-        Invoke("ParryDeactivate", 0.2f);
+        Invoke(nameof(ParryDeactivate), 0.2f);
     }
 
     void ParryDeactivate() 

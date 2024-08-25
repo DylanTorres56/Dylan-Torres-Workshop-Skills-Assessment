@@ -24,11 +24,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 posOfRWCB; // Position of Right Wall Check Box.
     [SerializeField] private Vector2 dimsOfWCB; // Dimensions of Wall Check Box.
     [SerializeField] float xGizmoDisplacement; // Edits the x-axis of the player's wall checker gizmo.
+    [SerializeField] float wallJumpResetTimer;
+    [SerializeField] bool isWallJumping;
+    //[SerializeField] float jumpLeftOrRight; // If the player is holding the right wall, they will jump off to the left, and vice versa.
 
     public bool GroundCheck() // Checks if the player is grounded.
     {
         posOfGCB = new Vector2(transform.position.x, transform.position.y - yGizmoDisplacement);
-        dimsOfGCB = new Vector2(1f, 0.2f);
+        dimsOfGCB = new Vector2(.75f, 0.2f);
         isAtopGround = Physics2D.OverlapBox(posOfGCB, dimsOfGCB, 0f, groundMask);
         return isAtopGround;
     }
@@ -42,10 +45,12 @@ public class PlayerController : MonoBehaviour
         if (Physics2D.OverlapBox(posOfLWCB, dimsOfWCB, 0f, groundMask))
         {
             wallCheck = -1;
+            //jumpLeftOrRight = wallCheck;
         }
         else if (Physics2D.OverlapBox(posOfRWCB, dimsOfWCB, 0f, groundMask))
         {
             wallCheck = 1;
+            //jumpLeftOrRight = wallCheck;
         }
         else 
         {
@@ -66,30 +71,52 @@ public class PlayerController : MonoBehaviour
         PlayerInput(); // Inputs are counted by frame.
         GroundCheck(); // Checks if player is grounded.
         WallCheck(); // Checks if player is holding a wall.
+
+        PlayerMovement(); // Movement is controlled by physics, so it goes in FixedUpdate.
+
+        if (isWallJumping)
+        {
+            WallJump();
+            Invoke(nameof(WallJumpReset), wallJumpResetTimer);
+        }
     }
 
-    // FixedUpdate is called once per physics update
+    /*// FixedUpdate is called once per physics update
     void FixedUpdate()
     {
         PlayerMovement(); // Movement is controlled by physics, so it goes in FixedUpdate.
-    }
+
+        if (isWallJumping)
+        {
+            WallJump();
+            Invoke(nameof(WallJumpReset), wallJumpResetTimer);
+        }
+    }*/
 
     // PlayerInput detects when players press inputs
     void PlayerInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal"); // Sets the player's horizontal move input.
-        
+
         // If Spacebar is pressed, call code to jump.
-        if (Input.GetKeyDown(KeyCode.Space) && GroundCheck()) 
+        if (Input.GetKeyDown(KeyCode.Space) && GroundCheck())
         {
             Jump();
         }
+        if (Input.GetKeyDown(KeyCode.Space) && WallCheck()) 
+        {
+            isWallJumping = true; 
+        }
+
     }
 
     // PlayerMovement detects when players are moving and not parrying.
     void PlayerMovement()
     {
-        rb.velocity = new Vector2(horizontalInput * movementSpeed, rb.velocity.y);        
+        if (gameObject.CompareTag("Player")) 
+        {
+            rb.velocity = new Vector2(horizontalInput * movementSpeed, rb.velocity.y);        
+        }
     }
 
     // Gizmos will be drawn to test the ground and wall checkers
@@ -110,11 +137,13 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void WallJump() 
     {
-        if (collision.gameObject.tag == "Wall") 
-        {
+        rb.velocity = new Vector2(movementSpeed * -wallCheck, jumpHeight);
+    }
 
-        }
+    void WallJumpReset() 
+    {
+        isWallJumping = false;
     }
 }

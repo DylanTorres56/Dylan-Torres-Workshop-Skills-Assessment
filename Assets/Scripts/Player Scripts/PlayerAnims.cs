@@ -9,6 +9,7 @@ using UnityEngine;
 public class PlayerAnims : MonoBehaviour
 {
     [SerializeField] private PlayerController pC;
+    [SerializeField] private PlayerParry pP;
     [SerializeField] Animator m_Animator;
     [SerializeField] SpriteRenderer sR;
     [SerializeField] bool isGrounded, isMoving, isOnWall, isParrying;
@@ -19,6 +20,7 @@ public class PlayerAnims : MonoBehaviour
         pC = gameObject.GetComponent<PlayerController>();
         m_Animator = gameObject.GetComponent<Animator>();
         sR = gameObject.GetComponent<SpriteRenderer>();
+        pP = gameObject.GetComponent<PlayerParry>();
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class PlayerAnims : MonoBehaviour
         isGrounded = pC.isAtopGround;
         isMoving = movementCheck;
         isOnWall = pC.WallCheck();
+        isParrying = gameObject.CompareTag("Parrying Player");
 
         switch (isGrounded) 
         {
@@ -62,6 +65,17 @@ public class PlayerAnims : MonoBehaviour
                 break;
             case false:
                 m_Animator.SetBool("isOnWall", isOnWall);
+                break;
+        }
+
+        switch (isParrying) 
+        {
+            case true:
+                m_Animator.SetBool("isParrying", isParrying);
+                //sR.flipX = pC.horizontalInput < 0;
+                break;
+            case false:
+                m_Animator.SetBool("isParrying", isParrying);
                 break;
         }
 

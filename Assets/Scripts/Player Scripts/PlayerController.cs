@@ -104,11 +104,8 @@ public class PlayerController : MonoBehaviour
 
     // PlayerMovement detects when players are moving and not parrying.
     void PlayerMovement()
-    {
-        if (gameObject.CompareTag("Player")) 
-        {
-            rb.velocity = new Vector2(horizontalInput * movementSpeed, rb.velocity.y);        
-        }
+    {        
+        rb.velocity = new Vector2(horizontalInput * movementSpeed, rb.velocity.y);                
     }
 
     // Gizmos will be drawn to test the ground and wall checkers
@@ -126,7 +123,11 @@ public class PlayerController : MonoBehaviour
 
     void Jump() 
     {
-        rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+        if(gameObject.tag == "Player")
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpHeight);            
+        }
+
     }
 
     void WallJump() 

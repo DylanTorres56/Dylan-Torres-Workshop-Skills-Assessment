@@ -935,10 +935,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Basic Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5463705517374093789, guid: ef328d9731c3774488e55862de1d01a7, type: 3}
-      propertyPath: wallJumpResetTimer
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 5677370491335394783, guid: ef328d9731c3774488e55862de1d01a7, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -982,10 +978,6 @@ PrefabInstance:
     - target: {fileID: 5677370491335394783, guid: ef328d9731c3774488e55862de1d01a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7597269373756574668, guid: ef328d9731c3774488e55862de1d01a7, type: 3}
-      propertyPath: m_Mass
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

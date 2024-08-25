@@ -71,17 +71,9 @@ public class PlayerController : MonoBehaviour
         PlayerInput(); // Inputs are counted by frame.
         GroundCheck(); // Checks if player is grounded.
         WallCheck(); // Checks if player is holding a wall.
-
-        PlayerMovement(); // Movement is controlled by physics, so it goes in FixedUpdate.
-
-        if (isWallJumping)
-        {
-            WallJump();
-            Invoke(nameof(WallJumpReset), wallJumpResetTimer);
-        }
     }
 
-    /*// FixedUpdate is called once per physics update
+    // FixedUpdate is called once per physics update
     void FixedUpdate()
     {
         PlayerMovement(); // Movement is controlled by physics, so it goes in FixedUpdate.
@@ -91,7 +83,7 @@ public class PlayerController : MonoBehaviour
             WallJump();
             Invoke(nameof(WallJumpReset), wallJumpResetTimer);
         }
-    }*/
+    }
 
     // PlayerInput detects when players press inputs
     void PlayerInput()

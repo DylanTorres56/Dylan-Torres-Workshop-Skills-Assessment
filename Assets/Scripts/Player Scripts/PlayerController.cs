@@ -45,12 +45,10 @@ public class PlayerController : MonoBehaviour
         if (Physics2D.OverlapBox(posOfLWCB, dimsOfWCB, 0f, groundMask))
         {
             wallCheck = -1;
-            //jumpLeftOrRight = wallCheck;
         }
         else if (Physics2D.OverlapBox(posOfRWCB, dimsOfWCB, 0f, groundMask))
         {
             wallCheck = 1;
-            //jumpLeftOrRight = wallCheck;
         }
         else 
         {

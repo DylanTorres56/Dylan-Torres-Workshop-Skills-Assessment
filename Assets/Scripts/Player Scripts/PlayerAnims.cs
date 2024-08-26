@@ -10,9 +10,13 @@ public class PlayerAnims : MonoBehaviour
 {
     [SerializeField] private PlayerController pC;
     [SerializeField] private PlayerParry pP;
+    [SerializeField] private GameManager gM;
     [SerializeField] Animator m_Animator;
     [SerializeField] SpriteRenderer sR;
-    [SerializeField] bool isGrounded, isMoving, isOnWall, isParrying;
+    public bool isGrounded, isMoving, isOnWall, isParrying;
+
+    [Header("GM References")]
+    public string characterState;
 
     [Header("SFX")]
     [SerializeField] AudioSource runSFX; // Run SFX
@@ -24,6 +28,7 @@ public class PlayerAnims : MonoBehaviour
         m_Animator = gameObject.GetComponent<Animator>();
         sR = gameObject.GetComponent<SpriteRenderer>();
         pP = gameObject.GetComponent<PlayerParry>();
+        gM = GameObject.FindFirstObjectByType<GameManager>().GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -43,6 +48,9 @@ public class PlayerAnims : MonoBehaviour
             case true:
                 m_Animator.SetBool("isGrounded", isGrounded);
                 sR.flipX = pC.horizontalInput < 0;
+
+                gM.UpdateCSI();
+
                 break;
             case false:
                 m_Animator.SetBool("isGrounded", isGrounded);
@@ -50,6 +58,9 @@ public class PlayerAnims : MonoBehaviour
                 {
                     runSFX.Stop();
                 }
+
+                gM.UpdateCSI();
+
                 break;
         }
         
@@ -61,11 +72,19 @@ public class PlayerAnims : MonoBehaviour
                 if (m_Animator.GetBool("isGrounded") && !m_Animator.GetBool("isOnWall") && !runSFX.isPlaying)
                 {
                     runSFX.Play();
-                }                
+                    characterState = "Moving";
+                }
+
+                gM.UpdateCSI();
+                
                 break;
             case false:
                 m_Animator.SetBool("isMoving", isMoving);
                 runSFX.Stop();
+                characterState = "Idle";
+
+                gM.UpdateCSI();
+
                 break;
         }
 
@@ -75,9 +94,15 @@ public class PlayerAnims : MonoBehaviour
                 m_Animator.SetBool("isOnWall", isOnWall);
                 sR.flipX = pC.wallCheck < 0;
                 runSFX.Stop();
+
+                gM.UpdateCSI();
+
                 break;
             case false:
                 m_Animator.SetBool("isOnWall", isOnWall);
+
+                gM.UpdateCSI();
+
                 break;
         }
 
@@ -85,10 +110,17 @@ public class PlayerAnims : MonoBehaviour
         {
             case true:
                 m_Animator.SetBool("isParrying", isParrying);
-                runSFX.Stop(); 
+                runSFX.Stop();
+                characterState = "Parrying";
+
+                gM.UpdateCSI();
+
                 break;
             case false:
                 m_Animator.SetBool("isParrying", isParrying);
+
+                gM.UpdateCSI();
+
                 break;
         }
 

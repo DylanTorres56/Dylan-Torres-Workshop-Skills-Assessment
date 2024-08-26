@@ -12,7 +12,7 @@ public class PlayerParry : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerHitbox = transform.GetComponent<BoxCollider2D>();        
+        playerHitbox = transform.GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame

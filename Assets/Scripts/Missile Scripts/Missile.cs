@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Missile : MonoBehaviour
@@ -54,11 +55,16 @@ public class Missile : MonoBehaviour
         if (collision.CompareTag("Parrying Player"))
         {
             parrySFX.Play();
-            FindObjectOfType<ScreenHitStop>().HitStop(missileHSD);
+            FindObjectOfType<ScreenHitStop>().HitStop(missileHSD);            
         }
+
+        Invoke("DeleteMissile", 0.5f);
 
     }
 
-
+    void DeleteMissile() 
+    {
+        Destroy(this.gameObject);
+    }
 
 }

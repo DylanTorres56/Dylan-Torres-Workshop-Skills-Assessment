@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerParry : MonoBehaviour
 {
     [SerializeField] BoxCollider2D playerHitbox; // The hitbox of the player.
-    [SerializeField] GameManager gM; // Game Manager that holds data for screen hitstop.
+    [SerializeField] GameManager gM; // Game Manager that holds data for screen hitstop and parry counter UI text.
     [SerializeField] ScreenHitStop sHS; // Script that causes hitstop upon a successful parry.
+    public int parriesLanded;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,15 @@ public class PlayerParry : MonoBehaviour
     void ParryDeactivate() 
     {
         playerHitbox.tag = "Player";
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Hazard") && playerHitbox.CompareTag("Parrying Player")) 
+        {
+            parriesLanded += 1;
+            gM.UpdateParryCounter();
+        }
     }
 
 }

@@ -6,13 +6,16 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject oKeyTextToggle, pKeyTextToggle;
-
+    [SerializeField] TMP_Text parryCounter;
+    [SerializeField] PlayerParry pP; // Reference to parry script; needed to get parriesLanded int. 
 
     // Start is called before the first frame update
     void Start()
     {
         oKeyTextToggle.SetActive(false);
         pKeyTextToggle.SetActive(false);
+        pP = GameObject.FindFirstObjectByType<PlayerParry>().GetComponent<PlayerParry>();
+        parryCounter.text = "Parries Landed: " + pP.parriesLanded.ToString();
     }
 
     // Update is called once per frame
@@ -40,6 +43,11 @@ public class GameManager : MonoBehaviour
         {
             pKeyTextToggle.SetActive(false);
         }
+    }
+
+    public void UpdateParryCounter() 
+    {
+        parryCounter.text = "Parries Landed: " + pP.parriesLanded.ToString();
     }
 
 }

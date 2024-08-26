@@ -36,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9069924168040255919
 SpriteRenderer:
@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pC: {fileID: 0}
+  pP: {fileID: 0}
   m_Animator: {fileID: 0}
   sR: {fileID: 0}
   isGrounded: 0
@@ -245,3 +246,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHitbox: {fileID: 0}
+  gM: {fileID: 0}
+  sHS: {fileID: 0}

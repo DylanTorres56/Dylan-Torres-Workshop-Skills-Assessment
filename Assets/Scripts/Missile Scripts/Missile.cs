@@ -7,7 +7,7 @@ public class Missile : MonoBehaviour
     [SerializeField] Collider2D hitbox;
     [SerializeField] Animator m_Animator;
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] float xVel; 
+    [SerializeField] float xVel;    
 
     private enum MissileState 
     {
@@ -16,6 +16,10 @@ public class Missile : MonoBehaviour
     }
     [SerializeField] private MissileState stateOfMissile;
 
+    [Header("HITSTOP REFERENCES")]    
+    //[SerializeField] ScreenHitStop sHS; // Script that causes hitstop upon a successful parry.
+    [Range(0.12f, 0.5f)] [SerializeField] float missileHSD; // Hit Stop Duration variable of the missile.
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +27,6 @@ public class Missile : MonoBehaviour
         m_Animator = gameObject.GetComponentInChildren<Animator>();
         rb = gameObject.GetComponentInChildren<Rigidbody2D>();
         stateOfMissile = MissileState.Intact;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     // FixedUpdate is called once per physics update
@@ -49,6 +47,12 @@ public class Missile : MonoBehaviour
         m_Animator.SetBool("hitsSurface", true); // When a missile hits another collider, play the burst animation.
         stateOfMissile = MissileState.Burst;
         hitbox.enabled = false;
+
+        if (collision.CompareTag("Parrying Player"))
+        {
+            FindObjectOfType<ScreenHitStop>().HitStop(missileHSD);
+        }
+
     }
 
 

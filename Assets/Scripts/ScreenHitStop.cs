@@ -4,42 +4,31 @@ using UnityEngine;
 
 public class ScreenHitStop : MonoBehaviour
 {
-
-    [SerializeField] float hitStopDuration; // Amount of time hitstop occurs for when parrying a hazard.
-    [SerializeField] float pendingHSD; // Pending Hit Stop Duration.
     [SerializeField] bool inHitStop; // A boolean that tracks if the player is already in hitstop.
+    float defaultTimeScale; // The default time scale of the project (1.0f).
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        defaultTimeScale = Time.timeScale;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void HitStop(float hitStopDuration) 
     {
-        if (pendingHSD < 0 && !inHitStop)
+        if(inHitStop)
         {
-            StartCoroutine(FreezeFrame());
+            return;
         }
+
+        Time.timeScale = 0;
+        StartCoroutine(Wait(hitStopDuration));
     }
 
-    void HitStop()
-    {
-        pendingHSD = hitStopDuration;
-    }
-
-    IEnumerator FreezeFrame()
+    IEnumerator Wait(float waitDuration) 
     {
         inHitStop = true;
-        var defaultTimeScale = Time.timeScale;
-        Time.timeScale = 0;
-
-        yield return new WaitForSecondsRealtime(hitStopDuration);
-
+        yield return new WaitForSecondsRealtime(waitDuration);
         Time.timeScale = defaultTimeScale;
-        pendingHSD = 0;
         inHitStop = false;
-    }
+    }    
 
 }

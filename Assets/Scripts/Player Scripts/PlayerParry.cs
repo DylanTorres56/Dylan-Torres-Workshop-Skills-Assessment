@@ -34,12 +34,4 @@ public class PlayerParry : MonoBehaviour
         playerHitbox.tag = "Player";
     }
 
-    /* void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Hazard"))
-        {
-            
-        }
-    }*/
-
 }

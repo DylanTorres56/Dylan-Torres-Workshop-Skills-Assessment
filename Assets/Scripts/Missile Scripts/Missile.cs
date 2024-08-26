@@ -7,7 +7,9 @@ public class Missile : MonoBehaviour
     [SerializeField] Collider2D hitbox;
     [SerializeField] Animator m_Animator;
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] float xVel;    
+    [SerializeField] float xVel;
+    [SerializeField] AudioSource missileSFX; // Sound that plays when missile explodes.
+    [SerializeField] AudioSource parrySFX; // Sound that plays when parry is successful.
 
     private enum MissileState 
     {
@@ -47,9 +49,11 @@ public class Missile : MonoBehaviour
         m_Animator.SetBool("hitsSurface", true); // When a missile hits another collider, play the burst animation.
         stateOfMissile = MissileState.Burst;
         hitbox.enabled = false;
+        missileSFX.Play();
 
         if (collision.CompareTag("Parrying Player"))
         {
+            parrySFX.Play();
             FindObjectOfType<ScreenHitStop>().HitStop(missileHSD);
         }
 

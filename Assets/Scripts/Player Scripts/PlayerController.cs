@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float movementSpeed; // Player's movement speed.
     public float horizontalInput; // Player's horizontal input.
     public float jumpHeight; // Controls the height of the player's jump.
+    [SerializeField] AudioSource jumpSFX;
 
     [Header("Ground Check")]
     public LayerMask groundMask; // Determines which layer is a ground layer.    
@@ -26,7 +27,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float xGizmoDisplacement; // Edits the x-axis of the player's wall checker gizmo.
     [SerializeField] float wallJumpResetTimer;
     [SerializeField] bool isWallJumping;
-    //[SerializeField] float jumpLeftOrRight; // If the player is holding the right wall, they will jump off to the left, and vice versa.
 
     public bool GroundCheck() // Checks if the player is grounded.
     {
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    // PlayerMovement detects when players are moving and not parrying.
+    // PlayerMovement detects when players are moving.
     void PlayerMovement()
     {        
         rb.velocity = new Vector2(horizontalInput * movementSpeed, rb.velocity.y);                
@@ -121,10 +121,12 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawCube(posOfRWCB, dimsOfWCB); // Right Wall
     }
 
+    // Once a player initiates a grounded parry, they cannot jump until it finishes.
     void Jump() 
     {
         if(gameObject.tag == "Player")
         {
+            jumpSFX.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpHeight);            
         }
 
@@ -132,6 +134,7 @@ public class PlayerController : MonoBehaviour
 
     void WallJump() 
     {
+        jumpSFX.Play();
         rb.velocity = new Vector2(movementSpeed * -wallCheck, jumpHeight);
     }
 
